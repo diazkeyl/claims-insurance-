@@ -1,0 +1,25 @@
+-- ====================================================================
+-- 3. ESCRITURA DE CONSULTAS ANALÍTICAS
+-- ====================================================================
+
+-- Consulta A: Número total de reclamos por cada tipo de póliza
+SELECT 
+    pt.TypeName AS Tipo_Poliza,
+    COUNT(c.ClaimID) AS Total_Reclamos
+FROM Claims c
+JOIN Policies p ON c.PolicyID = p.PolicyID
+JOIN PolicyTypes pt ON p.PolicyTypeID = pt.PolicyTypeID
+GROUP BY pt.TypeName;
+
+-- Consulta B: Frecuencia mensual de reclamos (cuántos ocurren por mes)
+SELECT 
+    DATE_TRUNC('month', c.ClaimDate) AS Mes, 
+    COUNT(c.ClaimID) AS Frecuencia_Reclamos
+FROM Claims c
+GROUP BY DATE_TRUNC('month', c.ClaimDate)
+ORDER BY Mes;
+
+-- Consulta C: Monto promedio de los reclamos realizados
+SELECT 
+    AVG(c.Amount) AS Monto_Promedio_Reclamo
+FROM Claims c;
