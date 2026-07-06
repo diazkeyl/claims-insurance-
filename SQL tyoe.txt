@@ -1,0 +1,33 @@
+-- ==========================================
+-- INSERCIÓN DE DATOS DE PRUEBA (SAMPLE DATA)
+-- ==========================================
+
+-- 1. Insertar Clientes
+INSERT INTO Customers (CustomerID, CustomerName, Email) VALUES
+(1, 'Alejandro Delgado', 'alejandro@email.com'),
+(2, 'Valeria Monge', 'valeria@email.com'),
+(3, 'Esteban Vargas', 'esteban@email.com'),
+(4, 'Mariana Solano', 'mariana@email.com');
+
+-- 2. Insertar Tipos de Póliza
+INSERT INTO PolicyTypes (PolicyTypeID, TypeName) VALUES
+(10, 'Auto'),
+(20, 'Hogar'),
+(30, 'Vida'),
+(40, 'Gastos Médicos');
+
+-- 3. Insertar Pólizas
+INSERT INTO Policies (PolicyID, CustomerID, PolicyTypeID, StartDate) VALUES
+(101, 1, 10, '2025-01-15'), -- Alejandro tiene póliza de Auto
+(102, 2, 20, '2025-02-20'), -- Valeria tiene póliza de Hogar
+(103, 3, 30, '2025-03-10'), -- Esteban tiene póliza de Vida
+(104, 4, 10, '2025-04-05'), -- Mariana tiene póliza de Auto
+(105, 1, 40, '2025-05-12'); -- Alejandro también tiene Gastos Médicos
+
+-- 4. Insertar Reclamos (Claims)
+INSERT INTO Claims (ClaimID, PolicyID, ClaimDate, Amount, Status) VALUES
+(501, 101, '2025-06-14', 1200.00, 'Aprobado'),   -- Reclamo de Auto (Alejandro)
+(502, 101, '2025-07-22', 450.00,  'Aprobado'),   -- Otro reclamo de Auto (Alejandro)
+(503, 102, '2025-06-18', 3500.00, 'Pendiente'),  -- Reclamo de Hogar (Valeria)
+(504, 104, '2025-08-01', 850.00,  'Rechazado'),  -- Reclamo de Auto (Mariana)
+(505, 105, '2025-08-15', 2100.00, 'Aprobado');   -- Reclamo Médicos (Alejandro)
