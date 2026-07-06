@@ -1,0 +1,48 @@
+-- ==========================================
+-- 1. CREACIÓN DEL ESQUEMA DE LA BASE DE DATOS
+-- ==========================================
+
+-- Tabla de Clientes
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    Email VARCHAR(100)
+);
+
+-- Tabla de Tipos de Póliza
+CREATE TABLE PolicyTypes (
+    PolicyTypeID INT PRIMARY KEY,
+    TypeName VARCHAR(50) -- Ejemplo: Auto, Hogar, Vida
+);
+
+-- Tabla de Pólizas
+CREATE TABLE Policies (
+    PolicyID INT PRIMARY KEY,
+    CustomerID INT,
+    PolicyTypeID INT,
+    StartDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (PolicyTypeID) REFERENCES PolicyTypes(PolicyTypeID)
+);
+
+-- Tabla de Reclamos (Claims)
+CREATE TABLE Claims (
+    ClaimID INT PRIMARY KEY,
+    PolicyID INT,
+    ClaimDate DATE,
+    Amount DECIMAL(10, 2),
+    Status VARCHAR(20), -- Ejemplo: Pendiente, Aprobado, Rechazado
+    FOREIGN KEY (PolicyID) REFERENCES Policies(PolicyID)
+);
+
+-- ==========================================
+-- 2. GESTIÓN DE ROLES Y PERMISOS
+-- ==========================================
+
+-- Crear Roles solicitados
+CREATE ROLE ClaimAnalyst;
+CREATE ROLE ClaimsManager;
+
+-- Asignar Permisos básicos
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO ClaimAnalyst;
+GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO ClaimsManager;
