@@ -1,0 +1,9 @@
+-- ====================================================================
+-- 4. OPTIMIZACIÓN DE RENDIMIENTO (INDEXACIÓN)
+-- ====================================================================
+
+-- Índice en la fecha de reclamo (muy útil para filtros mensuales o anuales)
+CREATE INDEX idx_claims_date ON Claims(ClaimDate);
+
+-- Índice en el ID de la póliza (acelera los JOINs y filtros por póliza)
+CREATE INDEX idx_claims_policy ON Claims(PolicyID);
